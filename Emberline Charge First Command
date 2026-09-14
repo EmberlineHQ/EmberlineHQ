@@ -37,3 +37,24 @@ def handle_bump(bumped):
 handle_bump(True)
 action = handle_bump(False)  #True to test bump
 print("Action:", "cleaning in progress")
+def needs_dock(level,
+threshold):
+    return level < threshold
+
+def go_dock():
+    print("Emberline docking to charge.")
+
+battery = 15
+threshold = 20
+
+if needs_dock(battery,
+threshold):
+    go_dock()
+else:
+    print("Battery ok - Keep working.")def handle_bump(bumped):
+    if bumped:
+        print("Bump! Turning around.")
+        return "turn"
+    else:
+        print("Path clear.")
+        return "forward"
