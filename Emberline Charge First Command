@@ -51,10 +51,16 @@ if needs_dock(battery,
 threshold):
     go_dock()
 else:
-    print("Battery ok - Keep working.")def handle_bump(bumped):
+    print("Battery ok - Keep working.")
+def status(battery, bumped):
+# starts here
+    if needs_dock(battery, 20):
+#inside (indented)
+        return go_dock({battery})
     if bumped:
-        print("Bump! Turning around.")
-        return "turn"
-    else:
-        print("Path clear.")
-        return "forward"
+        return go_dock({battery})
+        return "keep_working"
+#still inside
+
+print("go_dock", (80, False))
+#OUTSIDE - no indent, runs on its own
