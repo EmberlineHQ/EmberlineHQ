@@ -1,0 +1,29 @@
+name = "X users"
+print("Hello,", name)
+print("Emberline is real.")
+for i in range(1, 4):
+    print("Building Emberline - step", i)
+def do_step(step_name):
+    print("Emberline doing:",step_name)
+    return True
+
+def base_battery_ok(level, threshold):
+    return level >= threshold
+def run_all(steps, battery_level, threshold):
+    if base_battery_ok(battery_level, threshold):
+        for step in steps:
+            do_step(step)
+    else:
+        print("Charge first.")
+steps = (["sweep_floor", "bring_water",
+    "wash_dishes"])
+
+# battery 80, need at least 20 -> runs the steps
+run_all,(steps, 80, 20)
+
+#battery 10, need at least 20 -> prints Charge first
+run_all(steps, 10, 20)
+
+for step in steps:
+    print(step)
+print("Done for now.")
