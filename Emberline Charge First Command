@@ -35,4 +35,5 @@ def handle_bump(bumped):
         print("Path clear.")
         return "forward"
 handle_bump(True)
-handle_bump(False)
+action = handle_bump(False)  #True to test bump
+print("Action:", "cleaning in progress")
