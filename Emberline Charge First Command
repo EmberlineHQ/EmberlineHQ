@@ -1,4 +1,4 @@
-name = "Customer."
+name = "Customer"
 print("Hello,", name)
 print("Emberline is real.")
 for i in range(1, 4):
@@ -59,4 +59,24 @@ def status(battery, bumped):
 print(status(15, False))  #should dock
 print(status(80, True))   #should turn
 print(status(80, False))  #should keep working
-#OUTSIDE - no indent, runs on its own
+#OUTSIDE - no indent, runs on its ownpreter) to run Python online.
+
+chores = ["sweep_floor",
+"bring_water", "wash_dishes"]
+
+def run_chores(battery, bumped,
+chore_list):
+  state = status(battery,
+bumped)
+  print("State:", state)
+  if state != "keep_working":
+    return
+  for chore in chore_list:
+    print("Emberline doing:",
+chore)
+
+run_chores(80, False, chores)
+run_chores(15, False, chores)
+run_chores(80, True, chores)
+
+
