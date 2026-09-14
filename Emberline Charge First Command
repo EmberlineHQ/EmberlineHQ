@@ -56,11 +56,12 @@ def status(battery, bumped):
 # starts here
     if needs_dock(battery, 20):
 #inside (indented)
-        return go_dock({battery})
+        return go_dock()
     if bumped:
-        return go_dock({battery})
-        return "keep_working"
+        return "turn"
+    return "keep_working"
 #still inside
-
-print("go_dock", (80, False))
+print(status(15, False))  #should dock
+print(status(80, True))   #should turn
+print(status(80, False))  #should keep working
 #OUTSIDE - no indent, runs on its own
