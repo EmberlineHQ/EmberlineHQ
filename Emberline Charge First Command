@@ -1,4 +1,4 @@
-name = "User"
+name = "Customer."
 print("Hello,", name)
 print("Emberline is real.")
 for i in range(1, 4):
@@ -27,6 +27,7 @@ run_all(steps, 10, 20)
 for step in steps:
     print(step)
 print("Done for now.")
+
 def handle_bump(bumped):
     if bumped:
         print("Bump! Turning around.")
@@ -43,15 +44,9 @@ threshold):
 
 def go_dock():
     print("Emberline docking to charge.")
-
-battery = 15
+    return "dock"
 threshold = 20
 
-if needs_dock(battery,
-threshold):
-    go_dock()
-else:
-    print("Battery ok - Keep working.")
 def status(battery, bumped):
 # starts here
     if needs_dock(battery, 20):
