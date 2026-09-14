@@ -27,3 +27,12 @@ run_all(steps, 10, 20)
 for step in steps:
     print(step)
 print("Done for now.")
+def handle_bump(bumped):
+    if bumped:
+        print("Bump! Turning around.")
+        return "turn"
+    else:
+        print("Path clear.")
+        return "forward"
+handle_bump(True)
+handle_bump(False)
