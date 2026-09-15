@@ -106,9 +106,19 @@ bumped)
       print ("Emberline doing:",
   chore)
 
-  def use_battery(level, use = 5):
+def use_battery(level, use = 5):
     level = level - use
     if level < 0:
       level = 0
     print("Battery now:", level)
     return level
+
+def needs_dock(battery): 
+    if battery <= 20:
+      print("Dock now:")
+      return True
+    return False
+
+battery = 15
+if needs_dock(battery):
+  print("Go charge")
