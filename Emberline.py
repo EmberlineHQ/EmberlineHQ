@@ -122,3 +122,13 @@ def needs_dock(battery):
 battery = 15
 if needs_dock(battery):
   print("Go charge")
+
+def startup():
+    print("Emberline v0.1 beginning...")
+    battery = 100
+    print("Battery:", battery)
+    if needs_dock(battery):
+        print("Charge before chores")
+        return False
+        print("Ready for chores")
+        return True 
