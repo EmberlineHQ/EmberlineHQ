@@ -62,7 +62,8 @@ print(status(80, False))  #should keep working
 #OUTSIDE - no indent, runs on its ownpreter) to run Python online.
 
 chores = ["sweep_floor",
-"bring_water", "wash_dishes"]
+"bring_water", "wash_dishes",
+"say_hello"]
 
 def run_chores(battery, bumped,
 chore_list):
@@ -79,4 +80,30 @@ run_chores(80, False, chores)
 run_chores(15, False, chores)
 run_chores(80, True, chores)
 
+def main():
+  print("Emberline v0.1")
+  run_chores(80, False, chores)
+  run_chores(15, False, chores)
+  run_chores(80, True, chores)
+main()
+
+def drive(direction):
+  print("Driving", direction)
+  return direction
+
+def run_chores(battery, bumped,
+chore_list):
+  state = status(battery,
+bumped)
+  print("State:", state)
+  if state == "dock":
+      return
+  if state == "turn":
+      drive ("left")
+      return
+  drive("forward")
+  for chore in chore_list:
+      print ("Emberline doing:",
+  chore)
+  
 
