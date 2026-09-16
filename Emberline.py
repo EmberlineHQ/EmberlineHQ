@@ -18,16 +18,6 @@ def run_all(steps, battery_level, threshold):
 steps = (["sweep_floor", "bring_water",
     "wash_dishes"])
 
-# battery 80, need at least 20 -> runs the steps
-run_all,(steps, 80, 20)
-
-#battery 10, need at least 20 -> prints Charge first
-run_all(steps, 10, 20)
-
-for step in steps:
-    print(step)
-print("Done for now.")
-
 def handle_bump(bumped):
     if bumped:
         print("Bump! Turning around.")
@@ -106,29 +96,20 @@ bumped)
       print ("Emberline doing:",
   chore)
 
-def use_battery(level, use = 5):
+  def use_battery(level, use = 5):
     level = level - use
     if level < 0:
       level = 0
     print("Battery now:", level)
     return level
 
-def needs_dock(battery): 
-    if battery <= 20:
-      print("Dock now:")
-      return True
-    return False
+# battery 80, need at least 20 -> runs the steps
+run_all(steps, 80, 20)
 
-battery = 15
-if needs_dock(battery):
-  print("Go charge")
+#battery 10, need at least 20 -> prints Charge first
+run_all(steps, 10, 20)
+for step in steps:
+    print(step)
 
-def startup():
-    print("Emberline v0.1 beginning...")
-    battery = 100
-    print("Battery:", battery)
-    if needs_dock(battery):
-        print("Charge before chores")
-        return False
-        print("Ready for chores")
-        return True 
+run_all(steps, 100, 20)
+print("Done for now.")
