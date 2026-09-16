@@ -3,113 +3,77 @@ print("Hello,", name)
 print("Emberline is real.")
 for i in range(1, 4):
     print("Building Emberline - step", i)
+
 def do_step(step_name):
-    print("Emberline doing:",step_name)
+    print("Emberline doing:", step_name)
     return True
 
 def base_battery_ok(level, threshold):
     return level >= threshold
+
+def use_battery(level, use=5):
+    level = level - use
+    if level < 0:
+        level = 0
+    print("Battery now:", level)
+    return level
+
 def run_all(steps, battery_level, threshold):
     if base_battery_ok(battery_level, threshold):
         for step in steps:
             do_step(step)
+            battery_level = use_battery(battery_level)
     else:
         print("Charge first.")
-steps = (["sweep_floor", "bring_water",
-    "wash_dishes"])
+
+steps = ["sweep_floor", "bring_water", "wash_dishes"]
 
 def handle_bump(bumped):
     if bumped:
         print("Bump! Turning around.")
         return "turn"
-    else:
-        print("Path clear.")
-        return "forward"
-handle_bump(True)
-action = handle_bump(False)  #True to test bump
-print("Action:", "cleaning in progress")
-def needs_dock(level,
-threshold):
-    return level < threshold
+    print("Path clear.")
+    return "forward"
+
+def needs_dock(battery, threshold=20):
+    if battery <= threshold:
+        print("Dock now")
+        return True
+    return False
 
 def go_dock():
     print("Emberline docking to charge.")
     return "dock"
-threshold = 20
 
 def status(battery, bumped):
-# starts here
-    if needs_dock(battery, 20):
-#inside (indented)
+    if needs_dock(battery):
         return go_dock()
     if bumped:
         return "turn"
     return "keep_working"
-#still inside
-print(status(15, False))  #should dock
-print(status(80, True))   #should turn
-print(status(80, False))  #should keep working
-#OUTSIDE - no indent, runs on its ownpreter) to run Python online.
 
-chores = ["sweep_floor",
-"bring_water", "wash_dishes",
-"say_hello"]
-
-def run_chores(battery, bumped,
-chore_list):
-  state = status(battery,
-bumped)
-  print("State:", state)
-  if state != "keep_working":
-    return
-  for chore in chore_list:
-    print("Emberline doing:",
-chore)
-
-run_chores(80, False, chores)
-run_chores(15, False, chores)
-run_chores(80, True, chores)
+def run_chores(battery, bumped, chore_list):
+    state = status(battery, bumped)
+    print("State:", state)
+    if state != "keep_working":
+        return
+    for chore in chore_list:
+        print("Emberline doing:", chore)
 
 def main():
-  print("Emberline v0.1")
-  run_chores(80, False, chores)
-  run_chores(15, False, chores)
-  run_chores(80, True, chores)
+    print("Emberline v0.1")
+    print("--- run_all tests ---")
+    run_all(steps, 80, 20)
+    run_all(steps, 10, 20)
+    print("--- bump / status ---")
+    handle_bump(True)
+    handle_bump(False)
+    print(status(15, False))
+    print(status(80, True))
+    print(status(80, False))
+    print("--- chores ---")
+    run_chores(80, False, steps)
+    run_chores(15, False, steps)
+    print("Done for now.")
+
 main()
-
-def drive(direction):
-  print("Driving", direction)
-  return direction
-
-def run_chores(battery, bumped,
-chore_list):
-  state = status(battery,
-bumped)
-  print("State:", state)
-  if state == "dock":
-      return
-  if state == "turn":
-      drive ("left")
-      return
-  drive("forward")
-  for chore in chore_list:
-      print ("Emberline doing:",
-  chore)
-
-  def use_battery(level, use = 5):
-    level = level - use
-    if level < 0:
-      level = 0
-    print("Battery now:", level)
-    return level
-
-# battery 80, need at least 20 -> runs the steps
-run_all(steps, 80, 20)
-
-#battery 10, need at least 20 -> prints Charge first
-run_all(steps, 10, 20)
-for step in steps:
-    print(step)
-
-run_all(steps, 100, 20)
-print("Done for now.")
