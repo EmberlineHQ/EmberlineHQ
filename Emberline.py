@@ -1,3 +1,4 @@
+ 
 name = "Customer"
 print("Hello,", name)
 print("Emberline is real.")
@@ -62,7 +63,7 @@ def run_chores(battery, bumped, chore_list):
 
 def main():
     print("Emberline v0.1")
-    print("--- run_all tests ---")
+    print("--- run_all checks ---")
     run_all(steps, 80, 20)
     run_all(steps, 10, 20)
     print("--- bump / status ---")
@@ -74,6 +75,11 @@ def main():
     print("--- chores ---")
     run_chores(80, False, steps)
     run_chores(15, False, steps)
+    print("--- location - - -")
+    room = where_am_i("living room")
+    room = where_am_i("kitchen")
+    room = where_am_i("outside")
+    print("Last room was:", room)
     print("Done for now.")
 
 main()
