@@ -1,4 +1,3 @@
- 
 name = "Customer"
 print("Hello,", name)
 print("Emberline is real.")
